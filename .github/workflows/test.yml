@@ -36,5 +36,3 @@ jobs:
       run: yarn install
     - name: Install
       run: yarn lint
-    - name: Deploy Package
-      run: npx semantic-release
