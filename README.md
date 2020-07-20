@@ -20,11 +20,13 @@ This is the preferred method. For example:
 npm install --save-dev pagarme-js-types
 ```
 
-The types should then be automatically included by the compiler.
-You may need to add a `types` reference if you're not using modules:
-
-```ts
-/// <reference types="pagarme-js-types" />
+```json
+// tsconfig.json
+...
+  "include": [
+    "node_modules/pagarme-js-type/index.d.ts"
+  ]
+...
 ```
 
 See more in the [handbook](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).
