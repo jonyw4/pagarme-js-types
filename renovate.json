@@ -1,0 +1,5 @@
+{
+  "baseBranches": ["master"],
+  "extends": ["config:base"],
+  "schedule": ["every month"]
+}
