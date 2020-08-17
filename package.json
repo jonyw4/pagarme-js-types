@@ -1,11 +1,11 @@
 {
-  "name": "pagarme-js-type",
+  "name": "pagarme-js-types",
   "description": "📖 A simple typescript definition file for pagarme-js package",
   "version": "0.0.0",
   "files":["index.d.ts"],
   "main": "",
   "types": "index.d.ts",
-  "repository": "git@github.com:jonyw4/pagarme-js-type.git",
+  "repository": "git@github.com:jonyw4/pagarme-js-types.git",
   "author": "Jonathan Célio <jonathan.clio@hotmail.com>",
   "license": "MIT",
   "private": false,

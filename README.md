@@ -1,5 +1,5 @@
 # Pagar.me JavaScript Types
-[![npm (scoped)](https://img.shields.io/npm/v/pagarme-js-type.svg)](https://www.npmjs.com/package/pagarme-js-type)
+[![npm (scoped)](https://img.shields.io/npm/v/pagarme-js-types.svg)](https://www.npmjs.com/package/pagarme-js-types)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 A unofficial repository for adding typing / typescript compatibility for Pagar.me.
@@ -24,7 +24,7 @@ npm install --save-dev pagarme-js-types
 // tsconfig.json
 ...
   "include": [
-    "node_modules/pagarme-js-type/index.d.ts"
+    "node_modules/pagarme-js-types/index.d.ts"
   ]
 ...
 ```
