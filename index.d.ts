@@ -336,6 +336,71 @@ declare module 'pagarme' {
     }
   }
 
+  /**
+   * This method validates the properties supplied in the object.
+   *
+   *
+   * @param {Object} [body] An object that contains all properties to
+   *                        be validated.
+   * @param {(String|String[]|Number|Number[])} [body.cnpj] A CNPJ, or an array
+   *                                                        of CNPJs, to be
+   *                                                        validated.
+   * @param {(String|String[]|Number|Number[])} [body.cpf] A CPF, or an array of
+   *                                                       CPFs, to be
+   *                                                       validated.
+   * @param {(String|String[]|Number|Number[])} [body.ddd] A DDD, or an array of
+   *                                                       DDDs, to be validated.
+   * @param {(String|String[]|Number|Number[])} [body.zipcode] A zipcode, or an
+   *                                                           array of zipcodes,
+   *                                                           to be validated.
+   * @param {(String|String[]|Number|Number[])} [body.phone] A phone number, or
+   *                                                         an array of phones,
+   *                                                         to be validated.
+   *
+   *
+   * @param {Object|Object[]} [body.card] A card, or an array of cards, to be
+   *                                      validated.
+   * @param {String} [body.card.card_holder_name] The card's holder name.
+   * @param {(String|Number)} [body.card.card_number] The card's number.
+   * @param {(String|Number)} [body.card.card_cvv] The card's CVV.
+   * @param {(String|Number)} [body.card.card_expiration_date] The card's
+   *                                                           expiratation date.
+   *
+   * @returns {Object} An object that returns each of the supplied properties
+   *                   with true or false, indicating if the supplied value is valid
+   *                   or invalid.
+   *
+   * References:
+   * - https://pagarme.github.io/pagarme-js/module-validations.html
+   * - https://pagarme.github.io/pagarme-js/validations_index.js.html#line69
+   */
+  export function validate(body: {
+    cnpj?: string | string[] | number | number[];
+    cpf?: string | string[] | number | number[];
+    ddd?: string | string[] | number | number[];
+    zipcode?: string | string[] | number | number[];
+    phone?: string | string[] | number | number[];
+    card?: {
+      card_holder_name: string;
+      card_number: string | number;
+      card_cvv: string | number;
+      card_expiration_date: string | number;
+    };
+  }): {
+    cnpj?: boolean;
+    cpf?: boolean;
+    ddd?: boolean;
+    zipcode?: boolean;
+    phone?: boolean;
+    card?: {
+      brand: string;
+      card_holder_name: boolean;
+      card_number: boolean;
+      card_cvv: boolean;
+      card_expiration_date: boolean;
+    };
+  };
+
   export interface RefundsArgs {
     /** Filtro pelo ID da transação */
     transaction_id?: string;
