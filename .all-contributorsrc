@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "jonyw4",
+      "name": "Jonathan Célio",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/14056669?v=4",
+      "profile": "https://github.com/jonyw4",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "pagarme-js-types",
+  "projectOwner": "jonyw4",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
