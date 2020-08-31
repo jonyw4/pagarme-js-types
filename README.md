@@ -1,6 +1,6 @@
 # Pagar.me JavaScript Types
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![npm (scoped)](https://img.shields.io/npm/v/pagarme-js-types.svg)](https://www.npmjs.com/package/pagarme-js-types)
@@ -70,6 +70,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/rsfarias"><img src="https://avatars3.githubusercontent.com/u/40122116?v=4" width="100px;" alt=""/><br /><sub><b>Rafael Farias</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=rsfarias" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/jonyw4"><img src="https://avatars3.githubusercontent.com/u/14056669?v=4" width="100px;" alt=""/><br /><sub><b>Jonathan Célio</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=jonyw4" title="Code">💻</a> <a href="https://github.com/jonyw4/pagarme-js-types/commits?author=jonyw4" title="Documentation">📖</a></td>
   </tr>
 </table>
 
