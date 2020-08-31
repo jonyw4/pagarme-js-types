@@ -1,4 +1,5 @@
 # Pagar.me JavaScript Types
+
 [![npm (scoped)](https://img.shields.io/npm/v/pagarme-js-types.svg)](https://www.npmjs.com/package/pagarme-js-types)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
@@ -32,8 +33,11 @@ npm install --save-dev pagarme-js-types
 See more in the [handbook](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).
 
 ## To do
+
 You can create a PR to contribute for now these functions are typed:
-### Transactions 
+
+### Transactions
+
 - [x] all
 - [x] capture
 - [x] create
@@ -41,8 +45,14 @@ You can create a PR to contribute for now these functions are typed:
 - [x] refund
 
 ### Postback
+
 - [x] calculateSignature
 - [x] verifySignature
 
-### Refunds 
+### Refunds
+
 - [x] find
+
+### Validations
+
+- [x] validate
