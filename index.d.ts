@@ -1,7 +1,30 @@
 declare module 'pagarme' {
   export namespace client {
+    /**
+     * Returns a version of client with authentication data binded to the resource requests.
+     *
+     * @example
+     * // API Key Authentication
+     * pagarme.client.connect({ api_key: 'ak_test_y7jk294ynbzf93' })
+     *
+     * // Encryption Key Authentication
+     * pagarme.client.connect({ encryption_key: 'ek_test_y7jk294ynbzf93' })
+     *
+     * // Login Authentication
+     * pagarme.client.connect({ email: '', password: '' })
+     *
+     * @param {Object} authentication
+     * @returns {Promise} A Promise that resolves to a client with authentication data binded
+     *
+     * References:
+     * - https://pagarme.github.io/pagarme-js/module-client.html#~connect
+     * - https://pagarme.github.io/pagarme-js/client_index.js.html#line88
+     */
     function connect(authentication: {
-      api_key: string;
+      api_key?: string;
+      encryption_key?: string;
+      email?: string;
+      password?: string;
     }): Promise<typeof client>;
 
     function search(opts: any, query: any): any;
