@@ -252,8 +252,15 @@ declare module 'pagarme' {
       function find(opts: any, query: any): any;
     }
 
+    interface ICard {
+      card_holder_name: string;
+      card_expiration_date: string;
+      card_number: string;
+      card_cvv: string;
+    }
+
     namespace security {
-      function encrypt(opts: any, card: any): any;
+      function encrypt(card: ICard): string;
 
       function sign(opts: any, string: any): any;
 
@@ -772,10 +779,10 @@ declare module 'pagarme' {
       conta_dv: string;
       /** Tipo da conta bancária. */
       type:
-        | 'conta_corrente'
-        | 'conta_poupanca'
-        | 'conta_corrente_conjunta'
-        | 'conta_poupanca_conjunta';
+      | 'conta_corrente'
+      | 'conta_poupanca'
+      | 'conta_corrente_conjunta'
+      | 'conta_poupanca_conjunta';
       /** CPF ou CNPJ do favorecido */
       document_number: string;
       /** Nome/razão social do favorecido, Até 30 caracteres */
@@ -787,7 +794,7 @@ declare module 'pagarme' {
     bank_account_id: string;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface TransactionRefundCreditCardArgs {}
+  interface TransactionRefundCreditCardArgs { }
 
   export interface TransactionRefundDefaultArgs {
     /** The transaction ID. */
@@ -978,13 +985,13 @@ declare module 'pagarme' {
     payment_date: string;
     original_payment_date: string;
     type:
-      | 'credit'
-      | 'refund'
-      | 'refund_reversal'
-      | 'chargeback'
-      | 'chargeback_refund'
-      | 'block'
-      | 'unblock';
+    | 'credit'
+    | 'refund'
+    | 'refund_reversal'
+    | 'chargeback'
+    | 'chargeback_refund'
+    | 'block'
+    | 'unblock';
     payment_method: 'credit_card' | 'debit_card' | 'boleto';
     accrual_date: string;
     date_created: string;
@@ -1020,11 +1027,11 @@ declare module 'pagarme' {
     Amount: number | string;
     Type: 'ted' | 'doc' | 'credito_em_conta';
     Status:
-      | 'pending_transfer'
-      | 'transferred'
-      | 'failed'
-      | 'processing'
-      | 'canceled';
+    | 'pending_transfer'
+    | 'transferred'
+    | 'failed'
+    | 'processing'
+    | 'canceled';
     Fee: number | string;
     Funding_date: string;
     Funding_estimated_date: string;
