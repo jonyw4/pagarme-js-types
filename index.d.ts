@@ -612,13 +612,13 @@ declare module 'pagarme' {
     // TODO: Finalizar tipagem
     /** Regras de divisão da transação */
     split_rules?: Array<any>;
-    customer: CustomerInput;
+    customer?: CustomerInput;
     /** Obrigatório com o antifraude habilitado. Define os dados de cobrança, como nome e endereço */
     billing?: BillingInput;
     /** Deve ser preenchido no caso da venda de bem físico (ver objeto items) */
     shipping?: ShippingInput;
     /** Define os dados dos itens vendidos, como nome, preço unitário e quantidade */
-    items: ItemInput[];
+    items?: ItemInput[];
     /** Você pode passar dados adicionais na criação da transação para facilitar uma futura análise de dados tanto em nossa dashboard, quanto por seus sistemas. Ex: metadata[ idProduto ]=13933139 */
     metadata?: string;
     /** Valor único que identifica a transação para permitir uma nova tentativa de requisição com a segurança de que a mesma operação não será executada duas vezes acidentalmente.*/
