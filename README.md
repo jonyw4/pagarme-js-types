@@ -57,6 +57,9 @@ You can create a PR to contribute for now these functions are typed:
 
 - [x] validate
 
+### Security
+- [x] encrypt
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
