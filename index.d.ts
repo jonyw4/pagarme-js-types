@@ -260,7 +260,7 @@ declare module 'pagarme' {
     }
 
     namespace security {
-      function encrypt(card: ICard): string;
+      function encrypt(card: ICard): Promise<string>;
 
       function sign(opts: any, string: any): any;
 
