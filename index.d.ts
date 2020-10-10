@@ -148,7 +148,7 @@ declare module 'pagarme' {
     namespace customers {
       function all(opts: any, body: any): Promise<Customer[]>;
 
-      function create(opts: any, body: CustomerInput): Promise<Customer>;
+      function create(body: CustomerInput): Promise<Customer>;
 
       function find(opts: any, body: any): Promise<Customer>;
     }
@@ -484,7 +484,8 @@ declare module 'pagarme' {
     complementary: string;
   }
 
-  export type DocumentType = 'individual' | 'corporation' | 'other';
+  export type CustomerType = 'individual' | 'corporation' | 'other';
+  export type DocumentType = 'cpf' | 'cnpj' | 'passaporte' | 'other';
 
   export interface Document extends Address {
     /** Tipo de documento. Para compradores brasileiros, deve ser fornecido ao menos um CPF (no caso de pessoa física, i.e. `individual`) ou CNPJ (no caso de pessoa jurídica, i.e. `corporation`). Para compradores internacionais, o documento pode ser um passaporte (type `passport`) ou um campo personalizado (type `other`). */
@@ -498,7 +499,7 @@ declare module 'pagarme' {
     /** Nome ou razão social do comprador */
     name: string;
     /** Tipo de documento. Deve ser `individual` para pessoa física ou `corporation` para pessoa jurídica */
-    type: DocumentType;
+    type: CustomerType;
     /** País */
     country: Country;
     /** E-mail do comprador */
