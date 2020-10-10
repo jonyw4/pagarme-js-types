@@ -32,6 +32,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "italodeandra",
+      "name": "Ítalo Andrade",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/19225266?v=4",
+      "profile": "https://italodeandra.de",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
