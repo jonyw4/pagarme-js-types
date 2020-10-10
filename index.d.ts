@@ -27,7 +27,7 @@ declare module 'pagarme' {
       password?: string;
     }): Promise<typeof client>;
 
-    function search(opts: any, query: any): any;
+    function search<T>(query: SearchQuery): SearchOutput<T>;
 
     function status(opts: any): any;
 
@@ -1083,6 +1083,28 @@ declare module 'pagarme' {
     start_date?: number;
     end_date?: number;
   }
+
+  interface SearchOutput<T = unknown> {
+    _shards: {
+      total: number;
+      successful: number;
+      failed: number;
+    };
+    hits: {
+      total: number;
+      max_score: number;
+      hits: T[];
+    };
+    timed_out: boolean;
+    took: number;
+  }
+
+  interface SearchQuery {
+    type: 'transaction' | 'subscription' | 'bank_account' | 'customer';
+    query: Record<string, unknown> | string;
+    search_type?: string;
+  }
+
   enum Country {
     Af = 'af',
     Al = 'al',
