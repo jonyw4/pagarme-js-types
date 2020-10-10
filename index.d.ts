@@ -27,7 +27,21 @@ declare module 'pagarme' {
       password?: string;
     }): Promise<typeof client>;
 
-    function search<T>(query: SearchQuery): Promise<SearchOutput<T>>;
+    function search<T, Q extends SearchQuery>(
+      query: Q
+    ): Promise<
+      SearchOutput<
+        Q extends { type: 'customer' }
+          ? Customer
+          : Q extends { type: 'transaction' }
+          ? Transaction
+          : Q extends { type: 'subscription' }
+          ? Subscription
+          : Q extends { type: 'bank_account' }
+          ? BankAccount
+          : T
+      >
+    >;
 
     function status(opts: any): any;
 
@@ -1093,7 +1107,13 @@ declare module 'pagarme' {
     hits: {
       total: number;
       max_score: number;
-      hits: T[];
+      hits: {
+        _index: string;
+        _type: string;
+        _id: string;
+        _score: number;
+        _source: T;
+      }[];
     };
     timed_out: boolean;
     took: number;
