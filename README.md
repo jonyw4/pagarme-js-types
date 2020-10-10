@@ -1,6 +1,6 @@
 # Pagar.me JavaScript Types
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A unofficial repository for adding typing / typescript compatibility for Pagar.me.
@@ -72,6 +72,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/rsfarias"><img src="https://avatars3.githubusercontent.com/u/40122116?v=4" width="100px;" alt=""/><br /><sub><b>Rafael Farias</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=rsfarias" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jonyw4"><img src="https://avatars3.githubusercontent.com/u/14056669?v=4" width="100px;" alt=""/><br /><sub><b>Jonathan Célio</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=jonyw4" title="Code">💻</a> <a href="https://github.com/jonyw4/pagarme-js-types/commits?author=jonyw4" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/mrlmaia"><img src="https://avatars0.githubusercontent.com/u/56596799?v=4" width="100px;" alt=""/><br /><sub><b>Murilo Maia</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=mrlmaia" title="Code">💻</a></td>
+    <td align="center"><a href="https://italodeandra.de"><img src="https://avatars1.githubusercontent.com/u/19225266?v=4" width="100px;" alt=""/><br /><sub><b>Ítalo Andrade</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=italodeandra" title="Code">💻</a> <a href="https://github.com/jonyw4/pagarme-js-types/commits?author=italodeandra" title="Documentation">📖</a></td>
   </tr>
 </table>
 
