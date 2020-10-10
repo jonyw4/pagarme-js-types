@@ -27,7 +27,7 @@ declare module 'pagarme' {
       password?: string;
     }): Promise<typeof client>;
 
-    function search<T>(query: SearchQuery): SearchOutput<T>;
+    function search<T>(query: SearchQuery): Promise<SearchOutput<T>>;
 
     function status(opts: any): any;
 
