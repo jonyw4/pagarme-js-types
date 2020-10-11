@@ -42,6 +42,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "outerlook",
+      "name": "Raffael Campos",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12937160?v=4",
+      "profile": "https://github.com/outerlook",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
