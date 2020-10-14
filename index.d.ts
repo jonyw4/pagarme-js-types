@@ -634,7 +634,7 @@ declare module 'pagarme' {
     // TODO: Finalizar tipagem
     /** Regras de divisão da transação */
     split_rules?: Array<any>;
-    customer: CustomerInput;
+    customer: CustomerInput | { id: string };
     /** Obrigatório com o antifraude habilitado. Define os dados de cobrança, como nome e endereço */
     billing?: BillingInput;
     /** Deve ser preenchido no caso da venda de bem físico (ver objeto items) */
