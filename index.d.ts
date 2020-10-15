@@ -32,14 +32,14 @@ declare module 'pagarme' {
     ): Promise<
       SearchOutput<
         Q extends { type: 'customer' }
-          ? Customer
-          : Q extends { type: 'transaction' }
-          ? Transaction
-          : Q extends { type: 'subscription' }
-          ? Subscription
-          : Q extends { type: 'bank_account' }
-          ? BankAccount
-          : T
+        ? Customer
+        : Q extends { type: 'transaction' }
+        ? Transaction
+        : Q extends { type: 'subscription' }
+        ? Subscription
+        : Q extends { type: 'bank_account' }
+        ? BankAccount
+        : T
       >
     >;
 
@@ -526,6 +526,24 @@ declare module 'pagarme' {
     birthday?: string;
   }
 
+  export interface CustomerBilletInput {
+    external_id?: string;
+    /** Nome ou razão social do comprador */
+    name: string;
+    /** Tipo de documento. Deve ser `individual` para pessoa física ou `corporation` para pessoa jurídica */
+    type: CustomerType;
+    /** País */
+    country: Country;
+    /** E-mail do comprador */
+    email?: string;
+    /** Documento. Contém campos type para tipo de documento e number para número do documento. */
+    documents: Document[];
+    /** Números de telefone. Requer ao menos um valor. Deve seguir o padrão *E.164* */
+    phone_numbers?: string[];
+    /** Data de nascimento */
+    birthday?: string;
+  }
+
   export interface Customer extends CustomerInput {
     /** Identificador do cliente na loja */
     id: string;
@@ -569,6 +587,7 @@ declare module 'pagarme' {
 
   export interface CreateTransactionBoletoInput {
     payment_method: 'boleto';
+    customer: CustomerBilletInput;
     boleto_fine?: {
       /** Dias após a expiração do boleto quando a multa deve ser cobrada. */
       days?: string;
@@ -589,6 +608,7 @@ declare module 'pagarme' {
 
   export interface CreateTransactionCreditCartInputBase {
     payment_method: 'credit_card';
+    customer: CustomerInput | { id: string };
   }
 
   export interface CreateTransactionCreditCartInputWithHash {
@@ -634,7 +654,6 @@ declare module 'pagarme' {
     // TODO: Finalizar tipagem
     /** Regras de divisão da transação */
     split_rules?: Array<any>;
-    customer: CustomerInput | { id: string };
     /** Obrigatório com o antifraude habilitado. Define os dados de cobrança, como nome e endereço */
     billing?: BillingInput;
     /** Deve ser preenchido no caso da venda de bem físico (ver objeto items) */
