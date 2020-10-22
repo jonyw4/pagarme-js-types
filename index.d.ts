@@ -27,7 +27,21 @@ declare module 'pagarme' {
       password?: string;
     }): Promise<typeof client>;
 
-    function search(opts: any, query: any): any;
+    function search<T, Q extends SearchQuery>(
+      query: Q
+    ): Promise<
+      SearchOutput<
+        Q extends { type: 'customer' }
+          ? Customer
+          : Q extends { type: 'transaction' }
+          ? Transaction
+          : Q extends { type: 'subscription' }
+          ? Subscription
+          : Q extends { type: 'bank_account' }
+          ? BankAccount
+          : T
+      >
+    >;
 
     function status(opts: any): any;
 
@@ -148,7 +162,7 @@ declare module 'pagarme' {
     namespace customers {
       function all(opts: any, body: any): Promise<Customer[]>;
 
-      function create(opts: any, body: CustomerInput): Promise<Customer>;
+      function create(body: CustomerInput): Promise<Customer>;
 
       function find(opts: any, body: any): Promise<Customer>;
     }
@@ -252,8 +266,15 @@ declare module 'pagarme' {
       function find(opts: any, query: any): any;
     }
 
+    interface ICard {
+      card_holder_name: string;
+      card_expiration_date: string;
+      card_number: string;
+      card_cvv: string;
+    }
+
     namespace security {
-      function encrypt(opts: any, card: any): any;
+      function encrypt(card: ICard): Promise<string>;
 
       function sign(opts: any, string: any): any;
 
@@ -477,9 +498,10 @@ declare module 'pagarme' {
     complementary: string;
   }
 
-  export type DocumentType = 'individual' | 'corporation' | 'other';
+  export type CustomerType = 'individual' | 'corporation' | 'other';
+  export type DocumentType = 'cpf' | 'cnpj' | 'passaporte' | 'other';
 
-  export interface Document extends Address {
+  export interface Document {
     /** Tipo de documento. Para compradores brasileiros, deve ser fornecido ao menos um CPF (no caso de pessoa física, i.e. `individual`) ou CNPJ (no caso de pessoa jurídica, i.e. `corporation`). Para compradores internacionais, o documento pode ser um passaporte (type `passport`) ou um campo personalizado (type `other`). */
     type: DocumentType;
     /** Número do documento */
@@ -491,7 +513,7 @@ declare module 'pagarme' {
     /** Nome ou razão social do comprador */
     name: string;
     /** Tipo de documento. Deve ser `individual` para pessoa física ou `corporation` para pessoa jurídica */
-    type: DocumentType;
+    type: CustomerType;
     /** País */
     country: Country;
     /** E-mail do comprador */
@@ -612,7 +634,7 @@ declare module 'pagarme' {
     // TODO: Finalizar tipagem
     /** Regras de divisão da transação */
     split_rules?: Array<any>;
-    customer?: CustomerInput;
+    customer?: CustomerInput | { id: string };
     /** Obrigatório com o antifraude habilitado. Define os dados de cobrança, como nome e endereço */
     billing?: BillingInput;
     /** Deve ser preenchido no caso da venda de bem físico (ver objeto items) */
@@ -772,10 +794,10 @@ declare module 'pagarme' {
       conta_dv: string;
       /** Tipo da conta bancária. */
       type:
-        | 'conta_corrente'
-        | 'conta_poupanca'
-        | 'conta_corrente_conjunta'
-        | 'conta_poupanca_conjunta';
+      | 'conta_corrente'
+      | 'conta_poupanca'
+      | 'conta_corrente_conjunta'
+      | 'conta_poupanca_conjunta';
       /** CPF ou CNPJ do favorecido */
       document_number: string;
       /** Nome/razão social do favorecido, Até 30 caracteres */
@@ -787,7 +809,7 @@ declare module 'pagarme' {
     bank_account_id: string;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface TransactionRefundCreditCardArgs {}
+  interface TransactionRefundCreditCardArgs { }
 
   export interface TransactionRefundDefaultArgs {
     /** The transaction ID. */
@@ -978,13 +1000,13 @@ declare module 'pagarme' {
     payment_date: string;
     original_payment_date: string;
     type:
-      | 'credit'
-      | 'refund'
-      | 'refund_reversal'
-      | 'chargeback'
-      | 'chargeback_refund'
-      | 'block'
-      | 'unblock';
+    | 'credit'
+    | 'refund'
+    | 'refund_reversal'
+    | 'chargeback'
+    | 'chargeback_refund'
+    | 'block'
+    | 'unblock';
     payment_method: 'credit_card' | 'debit_card' | 'boleto';
     accrual_date: string;
     date_created: string;
@@ -1020,11 +1042,11 @@ declare module 'pagarme' {
     Amount: number | string;
     Type: 'ted' | 'doc' | 'credito_em_conta';
     Status:
-      | 'pending_transfer'
-      | 'transferred'
-      | 'failed'
-      | 'processing'
-      | 'canceled';
+    | 'pending_transfer'
+    | 'transferred'
+    | 'failed'
+    | 'processing'
+    | 'canceled';
     Fee: number | string;
     Funding_date: string;
     Funding_estimated_date: string;
@@ -1075,249 +1097,277 @@ declare module 'pagarme' {
     start_date?: number;
     end_date?: number;
   }
+
+  interface SearchOutput<T = unknown> {
+    _shards: {
+      total: number;
+      successful: number;
+      failed: number;
+    };
+    hits: {
+      total: number;
+      max_score: number;
+      hits: {
+        _index: string;
+        _type: string;
+        _id: string;
+        _score: number;
+        _source: T;
+      }[];
+    };
+    timed_out: boolean;
+    took: number;
+  }
+
+  interface SearchQuery {
+    type: 'transaction' | 'subscription' | 'bank_account' | 'customer';
+    query: Record<string, unknown> | string;
+    search_type?: string;
+  }
+
   enum Country {
-    Af = 'AF',
-    Al = 'AL',
-    Dz = 'DZ',
-    As = 'AS',
-    Ad = 'AD',
-    Ao = 'AO',
-    Ai = 'AI',
-    Aq = 'AQ',
-    Ag = 'AG',
-    Ar = 'AR',
-    Am = 'AM',
-    Aw = 'AW',
-    Au = 'AU',
-    At = 'AT',
-    Az = 'AZ',
-    Bs = 'BS',
-    Bh = 'BH',
-    Bd = 'BD',
-    Bb = 'BB',
-    By = 'BY',
-    Be = 'BE',
-    Bz = 'BZ',
-    Bj = 'BJ',
-    Bm = 'BM',
-    Bt = 'BT',
-    Bo = 'BO',
-    Ba = 'BA',
-    Bw = 'BW',
-    Bv = 'BV',
-    Br = 'BR',
-    Io = 'IO',
-    Bn = 'BN',
-    Bg = 'BG',
-    Bf = 'BF',
-    Bi = 'BI',
-    Kh = 'KH',
-    Cm = 'CM',
-    Ca = 'CA',
-    Cv = 'CV',
-    Ky = 'KY',
-    Cf = 'CF',
-    Td = 'TD',
-    Cl = 'CL',
-    Cn = 'CN',
-    Cx = 'CX',
-    Cc = 'CC',
-    Co = 'CO',
-    Km = 'KM',
-    Cg = 'CG',
-    Cd = 'CD',
-    Ck = 'CK',
-    Cr = 'CR',
-    Ci = 'CI',
-    Hr = 'HR',
-    Cu = 'CU',
-    Cy = 'CY',
-    Cz = 'CZ',
-    Dk = 'DK',
-    Dj = 'DJ',
-    Dm = 'DM',
-    Do = 'DO',
-    Ec = 'EC',
-    Eg = 'EG',
-    Sv = 'SV',
-    Gq = 'GQ',
-    Er = 'ER',
-    Ee = 'EE',
-    Et = 'ET',
-    Fk = 'FK',
-    Fo = 'FO',
-    Fj = 'FJ',
-    Fi = 'FI',
-    Fr = 'FR',
-    Gf = 'GF',
-    Pf = 'PF',
-    Tf = 'TF',
-    Ga = 'GA',
-    Gm = 'GM',
-    Ge = 'GE',
-    De = 'DE',
-    Gh = 'GH',
-    Gi = 'GI',
-    Gr = 'GR',
-    Gl = 'GL',
-    Gd = 'GD',
-    Gp = 'GP',
-    Gu = 'GU',
-    Gt = 'GT',
-    Gg = 'GG',
-    Gn = 'GN',
-    Gw = 'GW',
-    Gy = 'GY',
-    Ht = 'HT',
-    Hm = 'HM',
-    Va = 'VA',
-    Hn = 'HN',
-    Hk = 'HK',
-    Hu = 'HU',
-    Is = 'IS',
-    In = 'IN',
-    Id = 'ID',
-    Ir = 'IR',
-    Iq = 'IQ',
-    Ie = 'IE',
-    Im = 'IM',
-    Il = 'IL',
-    It = 'IT',
-    Jm = 'JM',
-    Jp = 'JP',
-    Je = 'JE',
-    Jo = 'JO',
-    Kz = 'KZ',
-    Ke = 'KE',
-    Ki = 'KI',
-    Kp = 'KP',
-    Kr = 'KR',
-    Kw = 'KW',
-    Kg = 'KG',
-    La = 'LA',
-    Lv = 'LV',
-    Lb = 'LB',
-    Ls = 'LS',
-    Lr = 'LR',
-    Ly = 'LY',
-    Li = 'LI',
-    Lt = 'LT',
-    Lu = 'LU',
-    Mo = 'MO',
-    Mk = 'MK',
-    Mg = 'MG',
-    Mw = 'MW',
-    My = 'MY',
-    Mv = 'MV',
-    Ml = 'ML',
-    Mt = 'MT',
-    Mh = 'MH',
-    Mq = 'MQ',
-    Mr = 'MR',
-    Mu = 'MU',
-    Yt = 'YT',
-    Mx = 'MX',
-    Fm = 'FM',
-    Md = 'MD',
-    Mc = 'MC',
-    Mn = 'MN',
-    Me = 'ME',
-    Ms = 'MS',
-    Ma = 'MA',
-    Mz = 'MZ',
-    Mm = 'MM',
-    Na = 'NA',
-    Nr = 'NR',
-    Np = 'NP',
-    Nl = 'NL',
-    An = 'AN',
-    Nc = 'NC',
-    Nz = 'NZ',
-    Ni = 'NI',
-    Ne = 'NE',
-    Ng = 'NG',
-    Nu = 'NU',
-    Nf = 'NF',
-    Mp = 'MP',
-    No = 'NO',
-    Om = 'OM',
-    Pk = 'PK',
-    Pw = 'PW',
-    Ps = 'PS',
-    Pa = 'PA',
-    Pg = 'PG',
-    Py = 'PY',
-    Pe = 'PE',
-    Ph = 'PH',
-    Pn = 'PN',
-    Pl = 'PL',
-    Pt = 'PT',
-    Pr = 'PR',
-    Qa = 'QA',
-    Re = 'RE',
-    Ro = 'RO',
-    Ru = 'RU',
-    Rw = 'RW',
-    Sh = 'SH',
-    Kn = 'KN',
-    Lc = 'LC',
-    Pm = 'PM',
-    Vc = 'VC',
-    Ws = 'WS',
-    Sm = 'SM',
-    St = 'ST',
-    Sa = 'SA',
-    Sn = 'SN',
-    Rs = 'RS',
-    Sc = 'SC',
-    Sl = 'SL',
-    Sg = 'SG',
-    Sk = 'SK',
-    Si = 'SI',
-    Sb = 'SB',
-    So = 'SO',
-    Za = 'ZA',
-    Gs = 'GS',
-    Es = 'ES',
-    Lk = 'LK',
-    Sd = 'SD',
-    Sr = 'SR',
-    Sj = 'SJ',
-    Sz = 'SZ',
-    Se = 'SE',
-    Ch = 'CH',
-    Sy = 'SY',
-    Tw = 'TW',
-    Tj = 'TJ',
-    Tz = 'TZ',
-    Th = 'TH',
-    Tl = 'TL',
-    Tg = 'TG',
-    Tk = 'TK',
-    To = 'TO',
-    Tt = 'TT',
-    Tn = 'TN',
-    Tr = 'TR',
-    Tm = 'TM',
-    Tc = 'TC',
-    Tv = 'TV',
-    Ug = 'UG',
-    Ua = 'UA',
-    Ae = 'AE',
-    Gb = 'GB',
-    Us = 'US',
-    Um = 'UM',
-    Uy = 'UY',
-    Uz = 'UZ',
-    Vu = 'VU',
-    Ve = 'VE',
-    Vn = 'VN',
-    Vg = 'VG',
-    Vi = 'VI',
-    Wf = 'WF',
-    Eh = 'EH',
-    Ye = 'YE',
-    Zm = 'ZM',
-    Zw = 'ZW'
+    Af = 'af',
+    Al = 'al',
+    Dz = 'dz',
+    As = 'as',
+    Ad = 'ad',
+    Ao = 'ao',
+    Ai = 'ai',
+    Aq = 'aq',
+    Ag = 'ag',
+    Ar = 'ar',
+    Am = 'am',
+    Aw = 'aw',
+    Au = 'au',
+    At = 'at',
+    Az = 'az',
+    Bs = 'bs',
+    Bh = 'bh',
+    Bd = 'bd',
+    Bb = 'bb',
+    By = 'by',
+    Be = 'be',
+    Bz = 'bz',
+    Bj = 'bj',
+    Bm = 'bm',
+    Bt = 'bt',
+    Bo = 'bo',
+    Ba = 'ba',
+    Bw = 'bw',
+    Bv = 'bv',
+    Br = 'br',
+    Io = 'io',
+    Bn = 'bn',
+    Bg = 'bg',
+    Bf = 'bf',
+    Bi = 'bi',
+    Kh = 'kh',
+    Cm = 'cm',
+    Ca = 'ca',
+    Cv = 'cv',
+    Ky = 'ky',
+    Cf = 'cf',
+    Td = 'td',
+    Cl = 'cl',
+    Cn = 'cn',
+    Cx = 'cx',
+    Cc = 'cc',
+    Co = 'co',
+    Km = 'km',
+    Cg = 'cg',
+    Cd = 'cd',
+    Ck = 'ck',
+    Cr = 'cr',
+    Ci = 'ci',
+    Hr = 'hr',
+    Cu = 'cu',
+    Cy = 'cy',
+    Cz = 'cz',
+    Dk = 'dk',
+    Dj = 'dj',
+    Dm = 'dm',
+    Do = 'do',
+    Ec = 'ec',
+    Eg = 'eg',
+    Sv = 'sv',
+    Gq = 'gq',
+    Er = 'er',
+    Ee = 'ee',
+    Et = 'et',
+    Fk = 'fk',
+    Fo = 'fo',
+    Fj = 'fj',
+    Fi = 'fi',
+    Fr = 'fr',
+    Gf = 'gf',
+    Pf = 'pf',
+    Tf = 'tf',
+    Ga = 'ga',
+    Gm = 'gm',
+    Ge = 'ge',
+    De = 'de',
+    Gh = 'gh',
+    Gi = 'gi',
+    Gr = 'gr',
+    Gl = 'gl',
+    Gd = 'gd',
+    Gp = 'gp',
+    Gu = 'gu',
+    Gt = 'gt',
+    Gg = 'gg',
+    Gn = 'gn',
+    Gw = 'gw',
+    Gy = 'gy',
+    Ht = 'ht',
+    Hm = 'hm',
+    Va = 'va',
+    Hn = 'hn',
+    Hk = 'hk',
+    Hu = 'hu',
+    Is = 'is',
+    In = 'in',
+    Id = 'id',
+    Ir = 'ir',
+    Iq = 'iq',
+    Ie = 'ie',
+    Im = 'im',
+    Il = 'il',
+    It = 'it',
+    Jm = 'jm',
+    Jp = 'jp',
+    Je = 'je',
+    Jo = 'jo',
+    Kz = 'kz',
+    Ke = 'ke',
+    Ki = 'ki',
+    Kp = 'kp',
+    Kr = 'kr',
+    Kw = 'kw',
+    Kg = 'kg',
+    La = 'la',
+    Lv = 'lv',
+    Lb = 'lb',
+    Ls = 'ls',
+    Lr = 'lr',
+    Ly = 'ly',
+    Li = 'li',
+    Lt = 'lt',
+    Lu = 'lu',
+    Mo = 'mo',
+    Mk = 'mk',
+    Mg = 'mg',
+    Mw = 'mw',
+    My = 'my',
+    Mv = 'mv',
+    Ml = 'ml',
+    Mt = 'mt',
+    Mh = 'mh',
+    Mq = 'mq',
+    Mr = 'mr',
+    Mu = 'mu',
+    Yt = 'yt',
+    Mx = 'mx',
+    Fm = 'fm',
+    Md = 'md',
+    Mc = 'mc',
+    Mn = 'mn',
+    Me = 'me',
+    Ms = 'ms',
+    Ma = 'ma',
+    Mz = 'mz',
+    Mm = 'mm',
+    Na = 'na',
+    Nr = 'nr',
+    Np = 'np',
+    Nl = 'nl',
+    An = 'an',
+    Nc = 'nc',
+    Nz = 'nz',
+    Ni = 'ni',
+    Ne = 'ne',
+    Ng = 'ng',
+    Nu = 'nu',
+    Nf = 'nf',
+    Mp = 'mp',
+    No = 'no',
+    Om = 'om',
+    Pk = 'pk',
+    Pw = 'pw',
+    Ps = 'ps',
+    Pa = 'pa',
+    Pg = 'pg',
+    Py = 'py',
+    Pe = 'pe',
+    Ph = 'ph',
+    Pn = 'pn',
+    Pl = 'pl',
+    Pt = 'pt',
+    Pr = 'pr',
+    Qa = 'qa',
+    Re = 're',
+    Ro = 'ro',
+    Ru = 'ru',
+    Rw = 'rw',
+    Sh = 'sh',
+    Kn = 'kn',
+    Lc = 'lc',
+    Pm = 'pm',
+    Vc = 'vc',
+    Ws = 'ws',
+    Sm = 'sm',
+    St = 'st',
+    Sa = 'sa',
+    Sn = 'sn',
+    Rs = 'rs',
+    Sc = 'sc',
+    Sl = 'sl',
+    Sg = 'sg',
+    Sk = 'sk',
+    Si = 'si',
+    Sb = 'sb',
+    So = 'so',
+    Za = 'za',
+    Gs = 'gs',
+    Es = 'es',
+    Lk = 'lk',
+    Sd = 'sd',
+    Sr = 'sr',
+    Sj = 'sj',
+    Sz = 'sz',
+    Se = 'se',
+    Ch = 'ch',
+    Sy = 'sy',
+    Tw = 'tw',
+    Tj = 'tj',
+    Tz = 'tz',
+    Th = 'th',
+    Tl = 'tl',
+    Tg = 'tg',
+    Tk = 'tk',
+    To = 'to',
+    Tt = 'tt',
+    Tn = 'tn',
+    Tr = 'tr',
+    Tm = 'tm',
+    Tc = 'tc',
+    Tv = 'tv',
+    Ug = 'ug',
+    Ua = 'ua',
+    Ae = 'ae',
+    Gb = 'gb',
+    Us = 'us',
+    Um = 'um',
+    Uy = 'uy',
+    Uz = 'uz',
+    Vu = 'vu',
+    Ve = 've',
+    Vn = 'vn',
+    Vg = 'vg',
+    Vi = 'vi',
+    Wf = 'wf',
+    Eh = 'eh',
+    Ye = 'ye',
+    Zm = 'zm',
+    Zw = 'zw'
   }
 }
