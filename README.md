@@ -43,6 +43,7 @@ You can create a PR to contribute for now these functions are typed:
 - [x] create
 - [x] find
 - [x] refund
+- [x] calculateInstallmentsAmount
 
 ### Postback
 

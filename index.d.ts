@@ -316,7 +316,10 @@ declare module 'pagarme' {
     namespace transactions {
       function all(opts: any, body: TransactionFindAll): Promise<Transaction[]>;
 
-      function calculateInstallmentsAmount(opts: any, body: any): any;
+      function calculateInstallmentsAmount(
+        opts: any,
+        body: CalculateInstallmentsAmountInput
+      ): Promise<CalculateInstallmentsAmount>;
 
       function capture(opts: CaptureArgs): Promise<Transaction>;
 
@@ -862,6 +865,29 @@ declare module 'pagarme' {
     id: number;
   }
   type TransactionFindArgs = TransactionFindById | TransactionFindAll;
+
+  interface CalculateInstallmentsAmountInput {
+    /** The interest rate's value. */
+    interest_rate: number;
+    /**  The value of the purchase. */
+    amount: number;
+    /** The max number of installments. */
+    max_installments?: number;
+    /** The number of installments without interest. */
+    free_installments?: number;
+  }
+
+  interface CalculateInstallmentsAmount {
+    installments: {
+      [key: string]: Installment;
+    }
+  }
+
+  interface Installment {
+    installment: number;
+    amount: number;
+    installment_amount: number;
+  }
 
   /**
    * -------------------------------------------
