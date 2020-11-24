@@ -617,6 +617,7 @@ declare module 'pagarme' {
 
   export type CreateTransactionCreditCartInput = CreateTransactionCreditCartInputBase &
     (
+      | CreateTransactionCreditCartInputWitData
       | CreateTransactionCreditCartInputWithHash
       | CreateTransactionCreditCartInputWitId
     );
