@@ -570,6 +570,20 @@ declare module 'pagarme' {
     date?: string;
   }
 
+  export interface CreateTransactionPixInput {
+    payment_method: 'pix';
+    /** Deve ser informada a data de expiração do Pix. Aceitaremos os
+    formatos ISO 8601 (YYYY-MM-DD) para Pix com expiração até o fim do dia e RFC3339
+    (YYYY-MM-DDThh:mm:ss) quando o Pix deva ser encerrado em algum horário específico
+    do dia */
+    pix_expiration_date: string;
+    /** campos que serão exibidos como soft descriptors ao pagador */
+    pix_additional_fields: {
+      name: string;
+      value: string;
+    }[];
+  }
+
   export interface CreateTransactionBoletoInput {
     payment_method: 'boleto';
     boleto_fine?: {
@@ -656,7 +670,11 @@ declare module 'pagarme' {
   }
 
   export type CreateTransactionInput = CreateTransactionInputBase &
-    (CreateTransactionCreditCartInput | CreateTransactionBoletoInput);
+    (
+      | CreateTransactionCreditCartInput
+      | CreateTransactionBoletoInput
+      | CreateTransactionPixInput
+    );
 
   type RefuseStatus =
     | 'acquirer'
@@ -731,7 +749,10 @@ declare module 'pagarme' {
     /** URL (endpoint) de seu sistema que recebe notificações a cada mudança no status da transação. */
     postback_url: string;
     /** Método de pagamento */
-    payment_method: 'credit_card' | 'boleto';
+    payment_method: 'credit_card' | 'boleto' | 'pix';
+    pix_qrcode: string;
+    pix_expiration_date: string;
+    pix_additional_fields: string;
     /** Define qual foi a forma de captura dos dados de pagamento. */
     capture_method: 'magstripe' | 'emv' | 'ecommerce';
     /** Define qual foi a nota de antifraude atribuída a transação. Lembrando que por padrão, transações com score >= 95 são recusadas. */
