@@ -1,7 +1,7 @@
-import { InputCustomer } from './InputCustomer';
-import { Address } from './Address';
+import { CustomerCreateOptions } from './options';
+import { Address } from '../../common';
 
-export interface Customer extends InputCustomer {
+export interface Customer extends CustomerCreateOptions {
   /** Identificador do cliente na loja */
   id: string;
   /** Lista dos telefones relacionados ao cliente */
