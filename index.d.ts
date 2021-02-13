@@ -818,11 +818,7 @@ declare module 'pagarme' {
       /** Dígito verificador da conta. */
       conta_dv: string;
       /** Tipo da conta bancária. */
-      type:
-      | 'conta_corrente'
-      | 'conta_poupanca'
-      | 'conta_corrente_conjunta'
-      | 'conta_poupanca_conjunta';
+      type: ContaBancariaTypes;
       /** CPF ou CNPJ do favorecido */
       document_number: string;
       /** Nome/razão social do favorecido, Até 30 caracteres */
@@ -834,7 +830,7 @@ declare module 'pagarme' {
     bank_account_id: string;
   }
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface TransactionRefundCreditCardArgs { }
+  interface TransactionRefundCreditCardArgs {}
 
   export interface TransactionRefundDefaultArgs {
     /** The transaction ID. */
@@ -902,7 +898,7 @@ declare module 'pagarme' {
   interface CalculateInstallmentsAmount {
     installments: {
       [key: string]: Installment;
-    }
+    };
   }
 
   interface Installment {
@@ -936,7 +932,14 @@ declare module 'pagarme' {
     conta_dv: string;
     document_number: string;
     legal_name: string;
+    type?: ContaBancariaTypes;
   }
+
+  export type ContaBancariaTypes =
+    | 'conta_corrente'
+    | 'conta_poupanca'
+    | 'conta_corrente_conjunta'
+    | 'conta_poupanca_conjunta';
 
   export interface ContaBancaria {
     object: string;
@@ -946,7 +949,7 @@ declare module 'pagarme' {
     agencia_dv: string;
     conta: string;
     conta_dv: string;
-    type: string;
+    type: ContaBancariaTypes;
     document_type: string;
     document_number: string;
     legal_name: string;
@@ -960,8 +963,8 @@ declare module 'pagarme' {
     type: string;
   }
 
-  export interface RegisterInformationInput {
-    type: 'individual';
+  interface RegisterInformationInputIndividual {
+    type: string;
     document_number: string;
     name: string;
     site_url?: string;
@@ -969,13 +972,36 @@ declare module 'pagarme' {
     phone_numbers?: PhoneNumber[];
   }
 
+  interface RegisterInformationInputCorporation {
+    type: string;
+    document_number: string;
+    company_name: string;
+    email?: string;
+    site_url?: string;
+    phone_numbers?: PhoneNumber[];
+    managing_partners?: {
+      type: string;
+      document_number: string;
+      email: string;
+      name: string;
+    }[];
+  }
+
+  type RegisterInformationInput =
+    | RegisterInformationInputIndividual
+    | RegisterInformationInputCorporation;
+
   export interface CreateRecebedor {
     transfer_interval: string;
     transfer_day: string;
     transfer_enabled: boolean;
     bank_account_id?: string;
+    bank_account?: CreateContaBancaria;
     anticipatable_volume_percentage?: string;
     automatic_anticipation_enabled?: string;
+    automatic_anticipation_type?: string;
+    automatic_anticipation_days?: string;
+    automatic_anticipation_1025_delay?: string;
     postback_url?: string;
     register_information?: RegisterInformationInput;
   }
@@ -1048,13 +1074,13 @@ declare module 'pagarme' {
     payment_date: string;
     original_payment_date: string;
     type:
-    | 'credit'
-    | 'refund'
-    | 'refund_reversal'
-    | 'chargeback'
-    | 'chargeback_refund'
-    | 'block'
-    | 'unblock';
+      | 'credit'
+      | 'refund'
+      | 'refund_reversal'
+      | 'chargeback'
+      | 'chargeback_refund'
+      | 'block'
+      | 'unblock';
     payment_method: 'credit_card' | 'debit_card' | 'boleto';
     accrual_date: string;
     date_created: string;
@@ -1090,11 +1116,11 @@ declare module 'pagarme' {
     Amount: number | string;
     Type: 'ted' | 'doc' | 'credito_em_conta';
     Status:
-    | 'pending_transfer'
-    | 'transferred'
-    | 'failed'
-    | 'processing'
-    | 'canceled';
+      | 'pending_transfer'
+      | 'transferred'
+      | 'failed'
+      | 'processing'
+      | 'canceled';
     Fee: number | string;
     Funding_date: string;
     Funding_estimated_date: string;
