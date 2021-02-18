@@ -829,7 +829,6 @@ declare module 'pagarme' {
     /** ID da conta bancária. */
     bank_account_id: string;
   }
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface TransactionRefundCreditCardArgs {}
 
   export interface TransactionRefundDefaultArgs {
@@ -924,14 +923,30 @@ declare module 'pagarme' {
 
   // CONTA BANCARIA
 
+  /**
+   * Cria uma conta bancária para futuros pagamentos.
+   * https://docs.pagar.me/reference#criando-uma-conta-banc%C3%A1ria
+   *
+   * Os bancos aceitos pela Pagar.me são aqueles presentes na Febraban. A lista completa pode ser encontrada aqui: https://www.bcb.gov.br/pom/spb/estatistica/port/ASTR003.pdf
+   *
+   * Se a agência de sua conta não possuir dv, basta não adicionar a chave agencia_dv na request.
+   */
   export interface CreateContaBancaria {
+    /** Agência onde sua conta foi criada OBS: Limite de 4 caracteres, apenas números */
     agencia: string;
+    /** Dígito verificador da sua agência OBS: Deve conter 1 dígito, apenas alfanuméricos */
     agencia_dv?: string;
+    /** Código do banco OBS: Deve conter 3 caracteres, apenas números */
     bank_code: string;
+    /** Número da conta bancária OBS: Limite de 13 caracteres, apenas números */
     conta: string;
+    /** Dígito verificador da conta OBS: Limite de 2 caracteres, apenas alfanuméricos */
     conta_dv: string;
+    /** Documento identificador do titular da conta (cpf ou cnpj) Ex: 35146484252 */
     document_number: string;
+    /** Nome completo (se pessoa física) ou razão social (se pessoa jurídica). Até 30 caractéres */
     legal_name: string;
+    /** Tipo de conta bancária, valores possíveis: conta_corrente, conta_poupanca, conta_corrente_conjunta, conta_poupanca_conjunta */
     type?: ContaBancariaTypes;
   }
 
@@ -963,22 +978,37 @@ declare module 'pagarme' {
     type: string;
   }
 
+  /** https://docs.pagar.me/reference#objeto-recebedor-1 */
   interface RegisterInformationInputIndividual {
+    /** Utilizar "individual". */
     type: string;
+    /** Número do CPF. */
     document_number: string;
+    /** Nome do seller. */
     name: string;
+    /** Site do seller. */
     site_url?: string;
+    /** Email do seller */
     email: string;
+    /** Número de telefone do seller. Deve-se informar o DDD, número e o tipo. */
     phone_numbers?: PhoneNumber[];
   }
 
+  /** https://docs.pagar.me/reference#objeto-recebedor-1 */
   interface RegisterInformationInputCorporation {
+    /** Utilizar "corporation" */
     type: string;
+    /** Número do CNPJ. */
     document_number: string;
+    /** Nome fantasia do seller. */
     company_name: string;
+    /** Email do seller */
     email?: string;
+    /** Site do seller. */
     site_url?: string;
+    /** Número de telefone do seller. Deve-se informar o DDD, número e o tipo. */
     phone_numbers?: PhoneNumber[];
+    /** Dados dos sócios listados neste CNPJ. */
     managing_partners?: {
       type: string;
       document_number: string;
@@ -991,19 +1021,38 @@ declare module 'pagarme' {
     | RegisterInformationInputIndividual
     | RegisterInformationInputCorporation;
 
+  /**
+   * Com essa rota você consegue criar um recebedor, definindo o período que ele irá receber os pagamentos e qual a conta bancária que será utilizada para envio dos pagamentos.
+   * https://docs.pagar.me/reference#criando-um-recebedor
+   *
+   * Recebedores inativos - Todos os recebedores que foram criados a mais de 60 dias, não possuem valores a receber e nos últimos 60 dias não transacionaram ou realizaram transferências terão a transferência automática desabilitada. Mesmo que esse recebedor volte a transacionar eventualmente, a transferência automática precisa ser reabilitada manualmente nesses casos.
+   */
   export interface CreateRecebedor {
+    /** Frequência na qual o recebedor irá ser pago. Valores possíveis: daily, weekly, monthly */
     transfer_interval: string;
+    /** Dia no qual o recebedor vai ser pago. Depende do transfer_interval. Se for daily, não é necessário. Se for weekly pode ser de 1 (segunda) a 5 (sexta). Se for monthly, pode ser de 1 a 31. */
     transfer_day: string;
+    /** Variável que indica se o recebedor pode receber os pagamentos automaticamente */
     transfer_enabled: boolean;
+    /** Identificador de uma conta bancária previamente criada. Você também pode passar todos parâmetros necessários para criação de uma conta bancária. */
     bank_account_id?: string;
     bank_account?: CreateContaBancaria;
+    /** Porcentagem do valor passível de antecipação para este recebedor. */
     anticipatable_volume_percentage?: string;
+    /** Se o recebedor está habilitado para receber automaticamente ou não o valor disponível para antecipação. */
     automatic_anticipation_enabled?: string;
+    /** Configuração de como devemos criar as antecipações automáticas do recebedor. Valor full para criarmos antecipações seguindo a regra de volume máximo antecipável. Valor 1025, para criarmos antecipações de vendas inteiras, modelos D+X e 10/25. */
     automatic_anticipation_type?: string;
+    /** Lista de dias em que devemos criar as antecipações automáticas. */
     automatic_anticipation_days?: string;
+    /** Parâmetro de quantos dias, contados do dia da antecipação para trás, devemos desconsiderar na criação desta antecipação. */
     automatic_anticipation_1025_delay?: string;
+    /** URL (endpoint) de seu sistema que recebe notificações a cada mudança no status do recebedor. */
     postback_url?: string;
+    /** Campo usado para receber informações cadastrais de um recebedor. Este recebedor pode ser pessoal física ou pessoa jurídica, onde cada um tem formato especifico. */
     register_information?: RegisterInformationInput;
+    /** Objeto com dados adicionais do recebedor. */
+    metadata: object;
   }
   type UpdateRecebedor = {
     recipient_id: string;
