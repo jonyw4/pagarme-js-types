@@ -3,23 +3,20 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-A unofficial repository for adding typing / typescript compatibility for Pagar.me.
+A **unofficial repository** for adding typing / typescript compatibility for Pagar.me JS Client.
 
 It's a **work in progress**. All type definition are take from the **[official documentation API Pagar.me V4](https://docs.pagar.me/reference)** and **[official pagarme-js documentation](https://pagarme.github.io/pagarme-js/)**
 
-## What are declaration files?
+## 🤔 How to use?
 
-See the [TypeScript handbook](http://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html).
 
-## How do I get them?
-
-### npm
-
-This is the preferred method. For example:
+1. Install the package as `devDependencies` using `npm` or `yarn` 
 
 ```sh
 npm install --save-dev pagarme-js-types
 ```
+
+2. Include the package into your `tsconfig.json` file
 
 ```json
 // tsconfig.json
@@ -32,9 +29,28 @@ npm install --save-dev pagarme-js-types
 
 See more in the [handbook](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).
 
+## 💪 How to contribute
+Thanks for give support to this project. To contribute you need to create a fork of this repo and send a Pull Request. Every contributor is mentioned at [Contributors list](#Contributors)
+
+### Structure
+All the code are in the `src` folder that follows the same location of Pagar.me lib.
+Each *"module"* of Pagar.me lib is a folder that contains at least:
+
+- `namespace.ts`: declaration of functions inside of a module
+- `options.ts`: interfaces of the functions options
+- `response.ts`: interfaces of the functions responses
+
+Shared interfaces are in the folder called `common` in `src` root.
+
+### Commits
+This projects uses [commit lint to checks commit message](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum)
+
+### Sending a PR
+Just explains what you are changing and why. I will love if you sent where did you get this information too. Thanks 😍
+
 ## To do
 
-You can create a PR to contribute for now these functions are typed:
+You can create a PR to contribute, for now these functions are typed:
 
 ### Transactions
 
