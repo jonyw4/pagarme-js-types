@@ -52,6 +52,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "rodrigovenancioverissimo",
+      "name": "Rodrigo Venâncio Veríssimo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17599326?v=4",
+      "profile": "https://www.linkedin.com/in/rodrigo-ven%C3%A2ncio-ver%C3%ADssimo-b90495a7/",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
