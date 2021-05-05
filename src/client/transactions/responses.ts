@@ -114,7 +114,7 @@ export interface CalculateInstallmentsAmount {
 
 export interface CardHashKey {
     /** Momento de criação da chave pública. */
-    date_created: "string",
+    date_created: string,
     /** id retornado e que será utilizado para compor o card_hash, logo, é importante que você o reserve. */
     id: number,
     /** IP de onde a request foi originada. */
