@@ -6,7 +6,7 @@ import {
   TransactionCaptureOptions,
   TransactionRefundOptions
 } from './options';
-import { Transaction, CalculateInstallmentsAmount } from './responses';
+import { Transaction, CalculateInstallmentsAmount, CardHashKey } from './responses';
 
 declare module 'pagarme' {
   export namespace client {
@@ -23,7 +23,7 @@ declare module 'pagarme' {
 
       function capture(opts: TransactionCaptureOptions): Promise<Transaction>;
 
-      function cardHashKey(opts: any): any;
+      function cardHashKey(opts: any): Promise<CardHashKey>;
 
       function collectPayment(opts: any, body: any): any;
 

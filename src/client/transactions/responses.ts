@@ -111,3 +111,10 @@ export interface CalculateInstallmentsAmount {
     [key: string]: Installment;
   };
 }
+
+export interface CardHashKey {
+    date_created: "string",
+    id: number,
+    ip: string,
+    public_key: string,
+}
