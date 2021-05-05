@@ -14,5 +14,5 @@ export interface Address {
   /** Bairro */
   neighborhood?: string;
   /** Complemento. **Não pode ser uma string vazia** nem null */
-  complementary: string;
+  complementary?: string;
 }
