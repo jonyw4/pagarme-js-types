@@ -48,9 +48,15 @@ export interface TransactionCalculateInstallmentsAmountOptions {
 }
 
 interface SplitRuleArg {
+  /** indica se o recebedor atrelado assumirá os riscos de chargeback da transação */
   liable: boolean;
+  /** indica se o recebedor vinculado à regra será cobrado pelas taxas da transação */
   charge_processing_fee: boolean;
-  amount: number;
+  /** valor em centavos de quanto da transação irá para o recebedor. Não pode estar presente ao mesmo tempo que 'percentage' */
+  amount?: number;
+  /** valor em porcentagem de quanto da transação irá para o recebedor. Não pode estar presente ao mesmo tempo que 'amount' */
+  percentage?: number;
+  /** id de um recebedor */
   recipient_id: string;
 }
 
