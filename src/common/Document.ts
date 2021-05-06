@@ -1,4 +1,8 @@
 export interface Document {
+  /** tipo do objeto */
+  object?: "document",
+  /** id relacionada ao documento */
+  id?: "string",
   /**
    * Tipo de documento.
    *
