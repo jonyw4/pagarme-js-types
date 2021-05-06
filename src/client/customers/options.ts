@@ -3,6 +3,7 @@ import { Document } from '../../common/Document';
 import { CustomerType } from '../../common/CustomerType';
 
 export interface CustomerCreateOptions {
+  /** Identificador do cliente em sua plataforma. */
   external_id: string;
   /** Nome ou razão social do comprador */
   name: string;
