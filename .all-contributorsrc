@@ -62,6 +62,16 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "abrantesarthur",
+      "name": "Arthur Abrantes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12059676?v=4",
+      "profile": "https://github.com/abrantesarthur",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
