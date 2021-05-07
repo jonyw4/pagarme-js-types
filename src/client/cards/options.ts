@@ -8,7 +8,7 @@ export interface CardCreateOptions {
     /** Código de segurança do cartão. */
     card_cvv?: string;
     /** Informações do cliente do card a ser gerado. */
-    customer_id?: string;
+    customer_id?: number;
     /** Dados criptografados do cartão */
     card_hash: string;
 }

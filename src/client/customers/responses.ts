@@ -5,7 +5,7 @@ export interface Customer extends CustomerCreateOptions {
   /** Tipo do objeto */
   object:  "customer",
   /** Identificador do cliente na loja */
-  id: string;
+  id: number;
   /** Número do documento. */
   document_number: number | null;
   /** Tipo do documento. */
