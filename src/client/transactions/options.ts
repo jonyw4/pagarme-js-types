@@ -47,7 +47,7 @@ export interface TransactionCalculateInstallmentsAmountOptions {
   free_installments?: number;
 }
 
-interface SplitRuleArg {
+export interface SplitRuleArg {
   /** indica se o recebedor atrelado assumirá os riscos de chargeback da transação */
   liable: boolean;
   /** indica se o recebedor vinculado à regra será cobrado pelas taxas da transação */
