@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - next
 env:
   CI: true
   node: 12.x
