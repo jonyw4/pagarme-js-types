@@ -21,7 +21,7 @@ interface TransactionCreateOptionsBase {
   capture?: boolean;
   /** Regras de divisão da transação */
   split_rules?: Array<any>;
-  customer?: Customer | { id: string };
+  customer?: Customer | { id: number };
   /** Obrigatório com o antifraude habilitado. Define os dados de cobrança, como nome e endereço */
   billing?: Billing;
   /** Deve ser preenchido no caso da venda de bem físico (ver objeto items) */
