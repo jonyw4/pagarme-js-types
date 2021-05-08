@@ -1,6 +1,6 @@
 {
   "name": "pagarme-js-types",
-  "description": "📖 A simple typescript definition file for pagarme-js package",
+  "description": "📖 A simple typescript definition file for pagarme-js package.",
   "version": "0.0.0",
   "files": [
     "src"
