@@ -5,6 +5,7 @@ import {
 } from './PaymentMethods/index';
 import { Item, Billing, Shipping } from '../../common/index';
 import { CustomerCreateOptions as Customer } from '../../../customers/options';
+import {SplitRuleArg} from "../../options";
 
 interface TransactionCreateOptionsBase {
   /** Valor a ser cobrado. Deve ser passado em centavos. Ex: R$ 10.00 = 1000. Deve ser no mínimo 1 real (100) */
@@ -20,7 +21,7 @@ interface TransactionCreateOptionsBase {
   /** Após a autorização de uma transação, você pode escolher se irá capturar ou adiar a captura do valor. Caso opte por postergar a captura, atribua o valor false. */
   capture?: boolean;
   /** Regras de divisão da transação */
-  split_rules?: Array<any>;
+  split_rules?: Array<SplitRuleArg>;
   customer?: Customer | { id: string };
   /** Obrigatório com o antifraude habilitado. Define os dados de cobrança, como nome e endereço */
   billing?: Billing;
