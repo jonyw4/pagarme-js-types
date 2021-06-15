@@ -36,6 +36,7 @@ declare module 'pagarme' {
         T extends TransactionFindOptions ? Transaction[] : Transaction
       >;
 
+      function refund(body: TransactionRefundOptions): Promise<Transaction>;
       function refund(
         opts: any,
         body: TransactionRefundOptions

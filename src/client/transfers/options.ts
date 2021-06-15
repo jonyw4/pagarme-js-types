@@ -1,7 +1,7 @@
 export interface TransferCreateOptions {
-  amount: string;
+  amount: number;
   recipientId: string;
-  metaData?: JSON;
+  metaData?: any;
 }
 
 export interface TransferAllOptions {
@@ -13,4 +13,9 @@ export interface TransferAllOptions {
   id?: string;
   date_created?: string;
   created_at?: string;
+}
+
+
+export interface TransferFindOptions {
+  id?: string;
 }
