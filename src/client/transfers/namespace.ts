@@ -1,5 +1,9 @@
 import { Transfer } from './responses';
-import { TransferAllOptions, TransferCreateOptions } from './options';
+import { 
+  TransferAllOptions, 
+  TransferCreateOptions, 
+  TransferFindOptions 
+} from './options';
 
 declare module 'pagarme' {
   export namespace client {
@@ -9,7 +13,8 @@ declare module 'pagarme' {
 
       function cancel(opts: any, body: any): any;
       function days(opts: any): any;
-      function find(opts: any, body: any): any;
+      function find(body: TransferFindOptions): any;
+      function find(opts: any, body: TransferFindOptions): any;
       function limits(opts: any, params: any): any;
     }
   }

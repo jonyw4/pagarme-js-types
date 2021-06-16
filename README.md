@@ -27,6 +27,13 @@ npm install --save-dev pagarme-js-types
 ...
 ```
 
+Or if that doesn't work for you, instead of changing the tsconfig.json file, 
+just create the following file:
+```ts
+// src/@types/pagarme.d.ts
+import 'pagarme-js-types/src/index';
+```
+
 See more in the [handbook](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).
 
 ## 💪 How to contribute
