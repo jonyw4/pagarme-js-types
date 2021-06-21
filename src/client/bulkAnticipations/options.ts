@@ -12,3 +12,10 @@ export interface BulkAnticipationsCreateOptions {
   /** Define se o valor da antecipação será transferido automaticamente para a conta bancária do recebedor */
   automatic_transfer?: boolean;
 }
+
+export interface BulkAnticipationsConfirmOptions {
+  /** ID de recebedor desejado */
+  recipientId: string;
+  /** ID da antecipação desejada */
+  id: string;
+}

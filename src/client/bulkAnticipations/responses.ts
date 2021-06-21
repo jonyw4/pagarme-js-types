@@ -14,5 +14,5 @@ export interface BulkAnticipation {
   /** Taxa de antecipação relacionada aos recebíveis antecipados. */
   anticipation_fee: number;
   /** Identificador da antecipação */
-  id: string;
+  id: string;  
 }

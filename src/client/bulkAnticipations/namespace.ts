@@ -1,4 +1,4 @@
-import {BulkAnticipationsCreateOptions} from "./options";
+import {BulkAnticipationsConfirmOptions, BulkAnticipationsCreateOptions} from "./options";
 import {BulkAnticipation} from "./responses";
 
 declare module 'pagarme' {
@@ -8,7 +8,7 @@ declare module 'pagarme' {
 
       function cancel(opts: any, body: any): any;
 
-      function confirm(opts: any, body: any): any;
+      function confirm(opts: BulkAnticipationsConfirmOptions): Promise<BulkAnticipation>;
 
       function create(opts: BulkAnticipationsCreateOptions): Promise<BulkAnticipation>;
 
