@@ -16,5 +16,3 @@ export interface BulkAnticipation {
   /** Identificador da antecipação */
   id: string;
 }
-
-

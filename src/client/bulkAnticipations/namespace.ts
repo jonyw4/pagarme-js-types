@@ -10,7 +10,7 @@ declare module 'pagarme' {
 
       function confirm(opts: any, body: any): any;
 
-      function create(opts: BulkAnticipationsCreateOptions): BulkAnticipation;
+      function create(opts: BulkAnticipationsCreateOptions): Promise<BulkAnticipation>;
 
       function days(opts: any, body: any): any;
 
