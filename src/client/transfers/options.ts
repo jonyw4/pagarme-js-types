@@ -1,6 +1,6 @@
 export interface TransferCreateOptions {
   amount: string;
-  recipientId: string;
+  recipient_id: string;
   metaData?: JSON;
 }
 
