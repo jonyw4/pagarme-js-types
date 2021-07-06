@@ -17,10 +17,10 @@
     "lint:fix": "eslint --ext .ts,.tsx --fix"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "9.1.2",
+    "@commitlint/config-conventional": "12.1.4",
     "@typescript-eslint/eslint-plugin": "4.15.1",
     "@typescript-eslint/parser": "4.15.1",
-    "commitlint": "9.1.2",
+    "commitlint": "12.1.4",
     "eslint": "7.20.0",
     "eslint-config-prettier": "6.15.0",
     "eslint-plugin-prettier": "3.3.1",
