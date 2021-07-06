@@ -9,8 +9,8 @@ export interface Card {
     date_created: string;
     /** Data de atualização do objeto card. */
     date_updated: string;
-    /** Data de atualização do objeto card. */
-    brand: string;
+    /** Bandeira do cartão. */
+    brand: "mastercard" | "visa" | "elo" | "amex" | "discover" | "aura" | "jcb" | "hipercard" | "diners";
     /** Nome do portador do cartão. */
     holder_name: string;
     /** 6 primeiros dígitos do cartão. */
@@ -28,3 +28,4 @@ export interface Card {
     /** Data de expiração do cartão. */
     expiration_date: string;
 }
+
