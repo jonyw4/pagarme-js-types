@@ -1,5 +1,16 @@
 {
-  "baseBranches": ["master"],
+  "baseBranches": ["next"],
   "extends": ["config:base"],
-  "schedule": ["every month"]
+  "schedule": ["every month"],
+  "timezone": "America/Sao_Paulo",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ]
 }
