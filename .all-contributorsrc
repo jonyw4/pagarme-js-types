@@ -21,7 +21,9 @@
       "profile": "https://github.com/jonyw4",
       "contributions": [
         "code",
-        "doc"
+        "doc",
+        "review",
+        "mentoring"
       ]
     },
     {
@@ -71,6 +73,15 @@
       "contributions": [
         "code",
         "doc"
+      ]
+    },
+    {
+      "login": "sidinei-silva",
+      "name": "Sidinei Silva",
+      "avatar_url": "https://avatars.githubusercontent.com/u/20242151?v=4",
+      "profile": "https://github.com/sidinei-silva",
+      "contributions": [
+        "bug"
       ]
     }
   ],
