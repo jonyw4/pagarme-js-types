@@ -1,6 +1,6 @@
 # Pagar.me JavaScript Types
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 A **unofficial repository** for adding typing / typescript compatibility for Pagar.me JS Client.
@@ -100,6 +100,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/outerlook"><img src="https://avatars1.githubusercontent.com/u/12937160?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Raffael Campos</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=outerlook" title="Code">💻</a> <a href="https://github.com/jonyw4/pagarme-js-types/commits?author=outerlook" title="Documentation">📖</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/rodrigo-ven%C3%A2ncio-ver%C3%ADssimo-b90495a7/"><img src="https://avatars.githubusercontent.com/u/17599326?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rodrigo Venâncio Veríssimo</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=rodrigovenancioverissimo" title="Code">💻</a> <a href="https://github.com/jonyw4/pagarme-js-types/commits?author=rodrigovenancioverissimo" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/abrantesarthur"><img src="https://avatars.githubusercontent.com/u/12059676?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Arthur Abrantes</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/commits?author=abrantesarthur" title="Code">💻</a> <a href="https://github.com/jonyw4/pagarme-js-types/commits?author=abrantesarthur" title="Documentation">📖</a></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/sidinei-silva"><img src="https://avatars.githubusercontent.com/u/20242151?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sidinei Silva</b></sub></a><br /><a href="https://github.com/jonyw4/pagarme-js-types/issues?q=author%3Asidinei-silva" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 
