@@ -79,5 +79,5 @@ export interface RecipientCreateOptions {
 }
 
 export type RecipientUpdateOptions = {
-  recipient_id: string;
+  id: string;
 } & Partial<RecipientCreateOptions>;
