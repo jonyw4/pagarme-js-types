@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "9.1.2",
-    "@typescript-eslint/eslint-plugin": "5.36.1",
-    "@typescript-eslint/parser": "5.36.1",
+    "@typescript-eslint/eslint-plugin": "5.38.1",
+    "@typescript-eslint/parser": "5.38.1",
     "commitlint": "9.1.2",
     "eslint": "8.23.0",
     "eslint-config-prettier": "6.15.0",
