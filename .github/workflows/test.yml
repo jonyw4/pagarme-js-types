@@ -34,5 +34,5 @@ jobs:
           ${{ runner.OS }}-
     - name: Install
       run: yarn install
-    - name: Install
+    - name: Lint
       run: yarn lint
