@@ -1,21 +1,21 @@
-export interface SubscriptionAllBody {
+export interface SubscriptionAllOptions {
     // Pagination option to get a list of subscriptions. Number of subscriptions in a page
     count?: number;
     // Pagination option for a list of subscriptions. The page index.
     page?: number;
 }
 
-export interface SubscriptionCancelBody {
+export interface SubscriptionCancelOptions {
     // The subscription's ID
     id: number;
 }
 
-export interface SubscriptionCreateTransactionBody {
+export interface SubscriptionCreateTransactionOptions {
     // The subscription's ID
     id: number;
 }
 
-export interface SubscriptionFindBody {
+export interface SubscriptionFindOptions {
     // The subscription's ID. If not sent a subscriptions list will be returned instead.
     id?: number;
     // Pagination option to get a list of subscriptions. Number of subscriptions in a page
@@ -24,17 +24,17 @@ export interface SubscriptionFindBody {
     page?: number;
 }
 
-export interface SubscriptionFindTransactionsBody {
+export interface SubscriptionFindTransactionsOptions {
     // The subscription's ID
     id: number;
 }
 
-export interface SubscriptionSettleChargeBody {
+export interface SubscriptionSettleChargeOptions {
     // The subscription's ID
     id: number;
 }
 
-export interface SubscriptionUpdateBody {
+export interface SubscriptionUpdateOptions {
     // The subscription's ID
     id: number;
 }
