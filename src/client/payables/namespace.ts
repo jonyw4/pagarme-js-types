@@ -1,5 +1,5 @@
 import { Payable } from './responses';
-import { PayableFindBody } from './bodies';
+import { PayableFindOptions } from './options';
 import { Options } from '../../common/Options';
 
 declare module 'pagarme' {
