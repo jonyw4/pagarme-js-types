@@ -1,5 +1,5 @@
 import { Payable } from './responses';
-import { PayableFindOptions } from './options';
+import { PayableFindOptions, PayableAllOptions } from './options';
 import { Options } from '../../common/Options';
 
 declare module 'pagarme' {
@@ -11,6 +11,11 @@ declare module 'pagarme' {
        * @param body The payload for the request. https://docs-beta.pagar.me/v1/reference#retornando-recebíveis
        */
       function all(opts: Options, body: object): Promise<Payable[]>;
+      /**
+       * Makes a request to /payables
+       * @param body The payload for the request. https://docs-beta.pagar.me/v1/reference#retornando-recebíveis
+       */
+      function all(body: PayableAllOptions): Promise<Payable[]>;
 
       /**
        * Returns a company's payables aggregated by day
@@ -23,7 +28,12 @@ declare module 'pagarme' {
        * @param opts An options params which is usually already bound by connect functions.
        * @param body The payload for the request. API Reference for this payload (https://pagarme.readme.io/v1/reference#retornando-um-receb%C3%ADvel)
        */
-      function find(opts: Options, body: PayableFindBody): Promise<Payable[]>;
+      function find(opts: Options, body: PayableFindOptions): Promise<Payable[]>;
+      /**
+       * Makes a request to /payables or to /payables/:id
+       * @param body The payload for the request. API Reference for this payload (https://pagarme.readme.io/v1/reference#retornando-um-receb%C3%ADvel)
+       */
+      function find(body: PayableFindOptions): Promise<Payable[]>;
     }
   }
 }
