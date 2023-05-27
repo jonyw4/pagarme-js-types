@@ -9,8 +9,7 @@ It's a **work in progress**. All type definition are take from the **[official d
 
 ## 🤔 How to use?
 
-
-1. Install the package as `devDependencies` using `npm` or `yarn` 
+1. Install the package as `devDependencies` using `npm` or `yarn`
 
 ```sh
 npm install --save-dev pagarme-js-types
@@ -27,19 +26,30 @@ npm install --save-dev pagarme-js-types
 ...
 ```
 
-Or if that doesn't work for you, instead of changing the tsconfig.json file, 
+Or if that doesn't work for you, instead of changing the tsconfig.json file,
 just create the following file:
+
 ```ts
 // src/@types/pagarme.d.ts
 import 'pagarme-js-types/src/index';
 ```
 
+If you are using an older nodejs version, you can add a reference to this lib including on the first line of you file:
+
+```javascript
+/// <reference path="node_modules/pagarme-js-types/src/index.ts" />
+
+const pagarme = require('pagarme');
+```
+
 See more in the [handbook](http://www.typescriptlang.org/docs/handbook/declaration-files/consumption.html).
 
 ## 💪 How to contribute
+
 Thanks for give support to this project. To contribute you need to create a fork of this repo and send a Pull Request. Every contributor is mentioned at [Contributors list](#Contributors)
 
 ### Structure
+
 All the code are in the `src` folder that follows the same location of Pagar.me lib.
 Each *"module"* of Pagar.me lib is a folder that contains at least:
 
@@ -50,9 +60,11 @@ Each *"module"* of Pagar.me lib is a folder that contains at least:
 Shared interfaces are in the folder called `common` in `src` root.
 
 ### Commits
+
 This projects uses [commit lint to checks commit message](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#type-enum)
 
 ### Sending a PR
+
 Just explains what you are changing and why. I will love if you sent where did you get this information too. Thanks 😍
 
 ## To do
@@ -82,6 +94,7 @@ You can create a PR to contribute, for now these functions are typed:
 - [x] validate
 
 ### Security
+
 - [x] encrypt
 
 ## Contributors ✨

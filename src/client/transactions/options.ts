@@ -106,3 +106,26 @@ interface TransactionFindOptionsById {
 export type TransactionFindOptions =
   | TransactionFindOptionsByData
   | TransactionFindOptionsById;
+
+export interface TransactionCollectPaymentOptions {
+  // The transaction id
+  id: number;
+  // User email to send the payment request
+  email: string;
+}
+
+export interface TransactionReprocessOptions {
+  // The transaction ID.
+  id: number;
+  // Should capture the transaction.
+  capture: boolean;
+  // Should analyze the transaction.
+  analyze: boolean;
+}
+
+export interface TransactionUpdateOptions {
+  // The transaction ID
+  id: number;
+  // The transaction status
+  status: number;
+}
