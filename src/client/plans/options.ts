@@ -5,6 +5,15 @@ export interface PlansAllOptions {
     page?: number;
 }
 
+export interface PlansCreateOptions {
+    // Plan value in BRL cents
+    amount: number;
+    // Billing cycle
+    days: string;
+    // Plan name
+    name: string;
+}
+
 export interface PlansFindOptions {
     // The plan's ID. If not sent a plans list will be returned instead.
     id?: number;
