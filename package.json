@@ -22,7 +22,7 @@
     "@typescript-eslint/parser": "5.62.0",
     "commitlint": "9.1.2",
     "eslint": "8.56.0",
-    "eslint-config-prettier": "9.0.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "4.2.1",
     "husky": "7.0.4",
     "prettier": "2.2.1",
